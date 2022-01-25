@@ -1,0 +1,14 @@
+<routes>
+	<vehicle depart="0.1" departLane="0" departPos="74.22838542039905" departSpeed="9.11784289918084" id="201" type="passenger">
+		<route edges="49578 gneE0 -gneE3 49568" />
+	</vehicle>
+	<vehicle depart="0.1" departLane="0" departPos="56.822055517791156" departSpeed="8.702904153663177" id="202" type="passenger">
+		<route edges="49578 gneE0 -gneE1 49566" />
+	</vehicle>
+	<vehicle depart="0.1" departLane="0" departPos="92.62417004074369" departSpeed="7.269332913717637" id="203" type="passenger">
+		<route edges="49564 gneE1 -gneE2 49572" />
+	</vehicle>
+	<vehicle depart="0.1" departLane="0" departPos="34.474737640598356" departSpeed="6.303846025460825" id="204" type="passenger">
+		<route edges="49564 gneE1 -gneE2 49572" />
+	</vehicle>
+</routes>

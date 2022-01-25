@@ -1,0 +1,5 @@
+<additional>
+	<vTypeDistribution id="DEFAULT_VEHTYPE">
+		<vType accel="2.9" decel="7.5" guiShape="passenger" id="passenger" impatience="0.00" lcCooperative="1.00" lcImpatience="0.00" lcSpeedGain="3.00" lcStrategic="10.00" length="5.0" maxSpeed="50.0" minGap="1.0" probability="1.0" sigma="0.50" speedDev="0.10" speedFactor="0.90" vClass="passenger" width="2.0"/>
+	</vTypeDistribution>
+</additional>

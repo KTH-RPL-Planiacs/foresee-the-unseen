@@ -1,0 +1,8 @@
+<routes>
+	<vehicle depart="0.1" departLane="0" departPos="74.35556655738534" departSpeed="9.29821363715403" id="201" type="passenger">
+		<route edges="49578 gneE0 -gneE3 49568" />
+	</vehicle>
+	<vehicle depart="0.1" departLane="0" departPos="41.49646040076834" departSpeed="6.84770647878924" id="202" type="passenger">
+		<route edges="49564 gneE1 -gneE2 49572" />
+	</vehicle>
+</routes>

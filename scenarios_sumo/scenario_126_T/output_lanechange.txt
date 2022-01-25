@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2021-07-21 21:54:52 by Eclipse SUMO sumo Version 1.9.2
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="scenarios_sumo/scenario_126_T/DEU_Ffb-1_7_I-1-1.net.xml"/>
+        <route-files value="scenarios_sumo/scenario_126_T/DEU_Ffb-1_7_I-1-1.vehicles.rou.xml,scenarios_sumo/scenario_126_T/DEU_Ffb-1_7_I-1-1.pedestrians.rou.xml"/>
+        <additional-files value="scenarios_sumo/scenario_126_T/DEU_Ffb-1_7_I-1-1.add.xml"/>
+    </input>
+
+    <output>
+        <lanechange-output value="scenarios_sumo/scenario_126_T/output_lanechange.txt"/>
+    </output>
+
+    <time>
+        <begin value="0"/>
+        <step-length value="0.1"/>
+    </time>
+
+    <processing>
+        <lateral-resolution value="0"/>
+        <ignore-route-errors value="true"/>
+        <collision.check-junctions value="true"/>
+        <time-to-teleport value="-1"/>
+        <lanechange.duration value="15"/>
+    </processing>
+
+    <report>
+        <verbose value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="44709"/>
+    </traci_server>
+
+    <random_number>
+        <seed value="1234"/>
+    </random_number>
+
+    <gui_only>
+        <tracker-interval value="0.1"/>
+    </gui_only>
+
+</configuration>
+-->
+
+<lanechanges>
+</lanechanges>

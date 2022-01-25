@@ -1,0 +1,33 @@
+#GENERAL
+simulation_duration : 70
+
+#EGO_VEHICLE
+initial_state_x : 70
+initial_state_y : -23
+initial_state_orientation: 1.57
+initial_state_velocity: 9
+
+vehicle_type : car
+vehicle_length : 4.8
+vehicle_width : 2
+goal_point_x : 40
+goal_point_y : 5
+
+#PLANNER
+reference_speed : 9
+max_acceleration : 2
+max_deceleration : 4
+planning_horizon : 50
+safety_margin : 1.2
+
+#SENSOR
+field_of_view_degrees : 360
+min_resolution : 1
+view_range : 50
+
+#OCCLUSION_TRACKER
+min_velocity : 0
+max_velocity : 12
+min_shadow_area : 1
+prediction_horizon : 23
+tracking_enabled : True
