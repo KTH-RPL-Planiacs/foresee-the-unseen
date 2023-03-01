@@ -10,9 +10,8 @@ from shapely.ops import substring
 
 from commonroad.scenario.scenario import Scenario, Lanelet
 from commonroad.scenario.obstacle import DynamicObstacle, ObstacleType
-from commonroad.scenario.trajectory import State
+from commonroad.scenario.trajectory import InitialState
 from commonroad.prediction.prediction import SetBasedPrediction, Occupancy
-from commonroad_dc.collision.visualization.draw_dispatch import draw_object
 
 from utilities import Lanelet2ShapelyPolygon, ShapelyPolygon2Polygon, polygon_intersection, polygon_diff, polygon_union, cut_line
 
@@ -227,7 +226,7 @@ class Occlusion_tracker:
             obstacle_id = scenario.generate_object_id()
             obstacle_type = ObstacleType.UNKNOWN
             obstacle_shape = ShapelyPolygon2Polygon(shadow.polygon)
-            obstacle_initial_state = State(position = np.array([0,0]),
+            obstacle_initial_state = InitialState(position = np.array([0,0]),
                                            velocity = self.max_vel,
                                            orientation = 0,
                                            time_step = self.time_step)
