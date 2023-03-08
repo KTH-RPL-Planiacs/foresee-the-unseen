@@ -113,6 +113,7 @@ class Visualizer:
             shadow.draw(rnd, draw_params=draw_params)
 
         # Draw the shadow predictions
+        draw_params = DynamicObstacleParams.load(file_path="src/draw_params/shadow_prediction.yaml", validate_types=False)
         for i in reversed(range(time_horizon)):
             tint_factor = 0.005**(1/(i+1))
             Ri = int(R + (255 - R) * tint_factor)
@@ -120,7 +121,6 @@ class Visualizer:
             Bi = int(B + (255 - G) * tint_factor)
             color = rgb2hex(Ri,Gi,Bi)
 
-            draw_params = DynamicObstacleParams.load(file_path="src/draw_params/shadow_prediction.yaml", validate_types=False)
             draw_params.time_begin = time_begin+i
             draw_params.time_end = time_begin+i+1
             draw_params.occupancy.shape.facecolor = color
@@ -133,18 +133,11 @@ class Visualizer:
              time_begin=0,
              time_end=500,
              ego_vehicle=None,
-             obstacles=None,
-             lanes=None,
-             polygons=None,
-             shapelyPolygons=None,
-             shadows=None,
-             sensor_view=None,
-             goal_region=None):
+             sensor_view=None):
         
         draw_params = MPDrawParams().load(file_path="src/draw_params/scenario.yaml")
         draw_params.time_begin = time_begin
         draw_params.time_end = time_end
-        #draw_params.lanelet_network.draw_ids = [lanelet.lanelet_id for lanelet in scenario.lanelet_network.lanelets]
 
         # Set global draw params for drawing
         rnd = MPRenderer(figsize=(8,8))
@@ -177,143 +170,17 @@ class Visualizer:
 
         rnd.render()
 
-
-    def plot_obsolete(self,
-             scenario=None,
-             time_begin=0,
-             time_end=500,
-             ego_vehicle=None,
-             obstacles=None,
-             lanes=None,
-             polygons=None,
-             shapelyPolygons=None,
-             shadows=None,
-             sensor_view=None,
-             goal_region=None):
-
-        scenario_draw_params = {'time_begin': time_begin,
-                                'time_end': time_end,
-                                'scenario': {'static_obstacle': {'opacity': 1,
-                                                                 'facecolor': '#808080',
-                                                                 'edgecolor': '#000000',
-                                                                 'zorder': 1},
-                                             'dynamic_obstacle': {'shape': {'opacity': 1,
-                                                                            'facecolor': '#ffff00',
-                                                                            'edgecolor': '#000000',
-                                                                            'zorder': 100},
-                                                                  'occupancy': {'draw_occupancies': 1, #0=set, 1=set&traj, 2=None
-                                                                                'shape': {'opacity': 0.2,
-                                                                                          'facecolor': '#ffff00',
-                                                                                          'edgecolor': '#ffff00',
-                                                                                          'zorder': 100}},
-                                                                  'trajectory': {'draw_trajectory': False}
-                                                                  },
-                                             'lanelet_network': {'lanelet': {'left_bound_color': '#000000',
-                                                                             'right_bound_color': '#000000',
-                                                                             'draw_center_bound': False,
-                                                                             'fill_lanelet': False,
-                                                                             'draw_start_and_direction': False}}
-                                             }
-                               }
-
-        if sensor_view is not None:
-            draw_params = {'shape': {'opacity': 1,
-                                     'facecolor': '#E5E5FF',
-                                     'edgecolor': '#E5E5FF',
-                                     'zorder': 1}}
-            draw_object(ShapelyPolygon2Polygon(
-                sensor_view), draw_params=draw_params)
-        if scenario is not None:
-            if ego_vehicle is not None:
-                scenario.remove_obstacle(ego_vehicle)
-                draw_object(ego_vehicle, draw_params={'time_begin': time_begin,
-                                                      'time_end': time_end,
-                                                      'dynamic_obstacle': {'shape': {'opacity': 1,
-                                                                                     'facecolor': '#0000ff',
-                                                                                     'edgecolor': '#000000'},
-                                                                           'occupancy': {'draw_occupancies': 1,
-                                                                                         'shape': {'opacity': 0.2,
-                                                                                                   'facecolor': '#0000ff',
-                                                                                                   'edgecolor': '#0000ff'}},
-                                                                           'trajectory': {'draw_trajectory': False}
-                                                                           }})
-            shadow_obstacles = scenario.obstacles_by_role_and_type(
-                obstacle_type=ObstacleType.UNKNOWN)
-            scenario.remove_obstacle(shadow_obstacles)
-            draw_object(scenario, draw_params=scenario_draw_params)
-            self.draw_shadows(shadow_obstacles, time_begin, 20)
-
-            scenario.add_objects(shadow_obstacles)
-            if ego_vehicle is not None:
-                scenario.add_objects(ego_vehicle)
-        if obstacles is not None:
-            for obstacle in obstacles:
-                draw_params = {
-                    'shape': {'opacity': 0.2, 'facecolor': '#1d7eea'}}
-                draw_object(ShapelyPolygon2Polygon(
-                    obstacle), draw_params=draw_params)
-        if lanes is not None:
-            for lane in lanes:
-                draw_params = {
-                    'shape': {'opacity': 0.2, 'facecolor': '#1d7eea'}}
-                draw_object(lane.convert_to_polygon(), draw_params=draw_params)
-        if polygons is not None:
-            for polygon in polygons:
-                draw_params = {
-                    'shape': {'opacity': 0.5, 'facecolor': '#ffff00'}}
-                draw_object(polygon, draw_params=draw_params)
-        if shapelyPolygons is not None:
-            for shapelyPolygon in shapelyPolygons:
-                draw_params = {
-                    'shape': {'opacity': 0.5, 'facecolor': '#ffff00'}}
-                draw_object(ShapelyPolygon2Polygon(
-                    shapelyPolygon), draw_params=draw_params)
-        if shadows is not None:
-            for shadow in shadows:
-                draw_params = {
-                    'shape': {'opacity': 0.5, 'facecolor': '#ffff00'}}
-                draw_object(ShapelyPolygon2Polygon(
-                    shadow.polygon), draw_params=draw_params)
-        if goal_region is not None:
-            draw_params = {
-                "goal_region": {
-                    "draw_shape": False,
-                    "shape": {
-                        "circle": {
-                            "opacity": 1.0,
-                            "linewidth": 0.5,
-                            "facecolor": "#00ff00",
-                            "edgecolor": "#302404",
-                            "zorder": 15
-                            }
-                        }
-                    }
-                }
-            draw_object(goal_region, draw_params=draw_params)
-
     def plot_show(self,
                   scenario=None,
                   time_begin=0,
                   ego_vehicle=None,
-                  obstacles=None,
-                  lanes=None,
-                  polygons=None,
-                  shapelyPolygons=None,
-                  shadows=None,
-                  sensor_view=None,
-                  goal_region=None):
+                  sensor_view=None):
 
         plt.figure(figsize=(10, 10))
         self.plot(scenario=scenario,
                   time_begin=time_begin,
                   ego_vehicle=ego_vehicle,
-                  obstacles=obstacles,
-                  lanes=lanes,
-                  polygons=polygons,
-                  shapelyPolygons=shapelyPolygons,
-                  shadows=shadows,
-                  sensor_view=sensor_view,
-                  goal_region=goal_region)
+                  sensor_view=sensor_view)
         plt.xlim(0, 100)
         plt.ylim(-50, 50)
         plt.show()
