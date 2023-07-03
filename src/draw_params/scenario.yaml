@@ -1,0 +1,784 @@
+time_begin: 0
+time_end: 1
+antialiased: true
+axis_visible: true
+shape:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  opacity: 1.0
+  facecolor: '#1d7eea'
+  edgecolor: '#00478f'
+  linewidth: 0.5
+  zorder: 20
+  draw_mesh: false
+dynamic_obstacle:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_shape: true
+  draw_icon: false
+  draw_direction: false
+  draw_bounding_box: false
+  show_label: false
+  draw_signals: false
+  draw_initial_state: false
+  vehicle_shape:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    direction:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#ffff00'
+      edgecolor: '#000000'
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+    occupancy:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      draw_occupancies: false
+      shape:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        opacity: 1
+        facecolor: '#ffff00'
+        edgecolor: '#ffff00'
+        linewidth: 0.5
+        zorder: 100
+        draw_mesh: false
+      uncertain_position:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        opacity: 0.6
+        facecolor: k
+        edgecolor: r
+        linewidth: 0.5
+        zorder: 20
+        draw_mesh: false
+  signals:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    signal_radius: 0.5
+    indicator:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#ebc200'
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.2
+      draw_mesh: false
+    braking:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: red
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.2
+      draw_mesh: false
+    horn:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: red
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.1
+      draw_mesh: false
+    bluelight:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: blue
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.1
+      draw_mesh: false
+  state:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_arrow: false
+    radius: 0.5
+    scale_factor: 0.3
+    linewidth: null
+    edgecolor: black
+    facecolor: black
+    zorder: 25
+    arrow:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      linewidth: 1.5
+      edgecolor: black
+      facecolor: black
+      width: 0.8
+  history:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_history: false
+    steps: 5
+    step_size: 1
+    fade_color: 0.1
+    basecolor: '#ffe119'
+    occupancy:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.2
+      facecolor: '#1d7eea'
+      edgecolor: k
+      linewidth: 0.0
+      zorder: 17
+      draw_mesh: false
+  occupancy:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_occupancies: true
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.2
+      facecolor: '#ffff00'
+      edgecolor: '#ffff00'
+      linewidth: 0.5
+      zorder: 100
+      draw_mesh: false
+    uncertain_position:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.6
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+  trajectory:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_trajectory: false
+    facecolor: k
+    draw_continuous: false
+    line_width: 0.17
+    unique_colors: false
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 24
+      draw_mesh: false
+    zorder: 24
+static_obstacle:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  occupancy:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_occupancies: true
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#808080'
+      edgecolor: '#000000'
+      linewidth: 0.5
+      zorder: 1
+      draw_mesh: false
+    uncertain_position:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.6
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+phantom_obstacle:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_shape: true
+  draw_icon: false
+  draw_direction: false
+  draw_bounding_box: true
+  show_label: false
+  zorder: 20
+  draw_signals: true
+  vehicle_shape:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    direction:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#00478f'
+      edgecolor: '#00478f'
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+    occupancy:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      draw_occupancies: true
+      shape:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        opacity: 1.0
+        facecolor: '#e59dff'
+        edgecolor: '#00478f'
+        linewidth: 0.5
+        zorder: 20
+        draw_mesh: false
+      uncertain_position:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        opacity: 0.6
+        facecolor: k
+        edgecolor: r
+        linewidth: 0.5
+        zorder: 20
+        draw_mesh: false
+  signals:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    signal_radius: 0.5
+    indicator:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#ebc200'
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.2
+      draw_mesh: false
+    braking:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: red
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.2
+      draw_mesh: false
+    horn:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: red
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.1
+      draw_mesh: false
+    bluelight:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: blue
+      edgecolor: '#00478f'
+      linewidth: 0.0
+      zorder: 20.1
+      draw_mesh: false
+  draw_initial_state: false
+  state:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_arrow: false
+    radius: 0.5
+    scale_factor: 0.3
+    linewidth: null
+    edgecolor: black
+    facecolor: black
+    zorder: 25
+    arrow:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      linewidth: 1.5
+      edgecolor: black
+      facecolor: black
+      width: 0.8
+  history:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_history: false
+    steps: 5
+    step_size: 1
+    fade_color: 0.1
+    basecolor: '#ffe119'
+    occupancy:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.2
+      facecolor: '#1d7eea'
+      edgecolor: k
+      linewidth: 0.0
+      zorder: 17
+      draw_mesh: false
+  occupancy:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_occupancies: true
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#c641f6'
+      edgecolor: '#00478f'
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+    uncertain_position:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.6
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+  trajectory:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_trajectory: true
+    facecolor: k
+    draw_continuous: false
+    line_width: 0.17
+    unique_colors: false
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 24
+      draw_mesh: false
+    zorder: 24
+environment_obstacle:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  occupancy:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_occupancies: true
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#0e6000'
+      edgecolor: '#831d20'
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+    uncertain_position:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.6
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+trajectory:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_trajectory: true
+  facecolor: k
+  draw_continuous: false
+  line_width: 0.17
+  unique_colors: false
+  shape:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    opacity: 1.0
+    facecolor: k
+    edgecolor: r
+    linewidth: 0.5
+    zorder: 24
+    draw_mesh: false
+  zorder: 24
+lanelet_network:
+  time_begin: 0
+  time_end: 500
+  antialiased: true
+  kwargs_traffic_light_signs: {}
+  draw_ids: null
+  lanelet:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    left_bound_color: '#000000'
+    right_bound_color: '#000000'
+    center_bound_color: '#dddddd'
+    unique_colors: false
+    draw_stop_line: true
+    stop_line_color: '#ffffff'
+    draw_line_markings: true
+    draw_left_bound: true
+    draw_right_bound: true
+    draw_center_bound: false
+    draw_border_vertices: false
+    draw_start_and_direction: false
+    colormap_tangent: false
+    show_label: false
+    draw_linewidth: 0.5
+    fill_lanelet: false
+    facecolor: '#c7c7c7'
+  intersection:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_intersections: false
+    draw_incoming_lanelets: true
+    incoming_lanelets_color: '#3ecbcf'
+    draw_crossings: true
+    crossings_color: '#b62a55'
+    draw_successors: true
+    successors_left_color: '#ff00ff'
+    successors_straight_color: blue
+    successors_right_color: '#ccff00'
+    show_label: false
+  relative_angle: 0.0
+  traffic_sign:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_traffic_signs: false
+    show_traffic_signs: null
+    speed_limit_unit: auto
+    show_label: false
+    scale_factor: 1.0
+    zorder: 30
+  traffic_light:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_traffic_lights: true
+    red_color: red
+    yellow_color: '#feb609'
+    green_color: '#00aa16'
+    red_yellow_color: '#fe4009ff'
+    show_label: false
+    scale_factor: 1.0
+    zorder: 30
+traffic_light:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_traffic_lights: true
+  red_color: red
+  yellow_color: '#feb609'
+  green_color: '#00aa16'
+  red_yellow_color: '#fe4009ff'
+  show_label: false
+  scale_factor: 1.0
+  zorder: 30
+traffic_sign:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_traffic_signs: false
+  show_traffic_signs: null
+  speed_limit_unit: auto
+  show_label: false
+  scale_factor: 1.0
+  zorder: 30
+occupancy:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_occupancies: true
+  shape:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    opacity: 0.2
+    facecolor: '#1d7eea'
+    edgecolor: '#00478f'
+    linewidth: 0.5
+    zorder: 18
+    draw_mesh: false
+  uncertain_position:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    opacity: 0.6
+    facecolor: k
+    edgecolor: r
+    linewidth: 0.5
+    zorder: 20
+    draw_mesh: false
+state:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_arrow: false
+  radius: 0.5
+  scale_factor: 0.3
+  linewidth: null
+  edgecolor: black
+  facecolor: black
+  zorder: 25
+  arrow:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    linewidth: 1.5
+    edgecolor: black
+    facecolor: black
+    width: 0.8
+planning_problem:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  initial_state:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    label_zorder: 35
+    label: ''
+    state:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      draw_arrow: true
+      radius: 1.0
+      scale_factor: 0.5
+      linewidth: null
+      edgecolor: black
+      facecolor: g
+      zorder: 11
+      arrow:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        linewidth: 1.5
+        edgecolor: g
+        facecolor: g
+        width: 0.8
+  goal_region:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_occupancies: true
+    shape:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 1.0
+      facecolor: '#f1b514'
+      edgecolor: '#302404'
+      linewidth: 0.5
+      zorder: 15
+      draw_mesh: false
+    uncertain_position:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      opacity: 0.6
+      facecolor: k
+      edgecolor: r
+      linewidth: 0.5
+      zorder: 20
+      draw_mesh: false
+  lanelet:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    left_bound_color: '#555555'
+    right_bound_color: '#555555'
+    center_bound_color: '#dddddd'
+    unique_colors: false
+    draw_stop_line: true
+    stop_line_color: '#ffffff'
+    draw_line_markings: true
+    draw_left_bound: true
+    draw_right_bound: true
+    draw_center_bound: true
+    draw_border_vertices: false
+    draw_start_and_direction: true
+    colormap_tangent: false
+    show_label: false
+    draw_linewidth: 0.5
+    fill_lanelet: true
+    facecolor: '#c7c7c7'
+planning_problem_set:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_ids: null
+  planning_problem:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    initial_state:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      label_zorder: 35
+      label: ''
+      state:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        draw_arrow: true
+        radius: 1.0
+        scale_factor: 0.5
+        linewidth: null
+        edgecolor: black
+        facecolor: g
+        zorder: 11
+        arrow:
+          time_begin: 0
+          time_end: 1
+          antialiased: true
+          linewidth: 1.5
+          edgecolor: g
+          facecolor: g
+          width: 0.8
+    goal_region:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      draw_occupancies: true
+      shape:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        opacity: 1.0
+        facecolor: '#f1b514'
+        edgecolor: '#302404'
+        linewidth: 0.5
+        zorder: 15
+        draw_mesh: false
+      uncertain_position:
+        time_begin: 0
+        time_end: 1
+        antialiased: true
+        opacity: 0.6
+        facecolor: k
+        edgecolor: r
+        linewidth: 0.5
+        zorder: 20
+        draw_mesh: false
+    lanelet:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      left_bound_color: '#555555'
+      right_bound_color: '#555555'
+      center_bound_color: '#dddddd'
+      unique_colors: false
+      draw_stop_line: true
+      stop_line_color: '#ffffff'
+      draw_line_markings: true
+      draw_left_bound: true
+      draw_right_bound: true
+      draw_center_bound: true
+      draw_border_vertices: false
+      draw_start_and_direction: true
+      colormap_tangent: false
+      show_label: false
+      draw_linewidth: 0.5
+      fill_lanelet: true
+      facecolor: '#c7c7c7'
+initial_state:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  label_zorder: 35
+  label: ''
+  state:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    draw_arrow: true
+    radius: 1.0
+    scale_factor: 0.5
+    linewidth: null
+    edgecolor: black
+    facecolor: g
+    zorder: 11
+    arrow:
+      time_begin: 0
+      time_end: 1
+      antialiased: true
+      linewidth: 1.5
+      edgecolor: g
+      facecolor: g
+      width: 0.8
+goal_region:
+  time_begin: 0
+  time_end: 1
+  antialiased: true
+  draw_occupancies: false
+  shape:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    opacity: 1
+    facecolor: '#00ff00'
+    edgecolor: '#302404'
+    linewidth: 0.5
+    zorder: 15
+    draw_mesh: false
+  uncertain_position:
+    time_begin: 0
+    time_end: 1
+    antialiased: true
+    opacity: 0.6
+    facecolor: k
+    edgecolor: r
+    linewidth: 0.5
+    zorder: 20
+    draw_mesh: false

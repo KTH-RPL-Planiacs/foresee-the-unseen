@@ -10,12 +10,11 @@ from shapely.geometry import Point
 
 from commonroad.geometry.shape import Circle, Rectangle, Polygon as CommonRoadPolygon
 from commonroad.prediction.prediction import Occupancy, SetBasedPrediction
-from commonroad.scenario.trajectory import State
+from commonroad.scenario.trajectory import InitialState
 from commonroad.scenario.obstacle import ObstacleType, DynamicObstacle, StaticObstacle
 from commonroad.planning.planning_problem import PlanningProblemSet, PlanningProblem, GoalRegion
 from commonroad.common.util import Interval, AngleInterval
 from commonroad.scenario.scenario import Lanelet
-from commonroad_dc.collision.visualization.draw_dispatch import draw_object
 
 import yaml
 
@@ -115,7 +114,7 @@ def add_building_DEU_Ffb(scenario):
     scenario.add_objects(StaticObstacle(scenario.generate_object_id(),
                                         ObstacleType.BUILDING,
                                         Rectangle(10, 15),
-                                        State(position=np.array([83.6288, -11.5553]),
+                                        InitialState(position=np.array([83.6288, -11.5553]),
                                               orientation=0, time_step=0)))
 
 
@@ -136,7 +135,7 @@ def add_no_stop_zone_DEU_Ffb(scenario, planning_horizon, safety_margin=5):
         horizontal_lanes[0], vertical_lanes[0])
     no_stop_polygon = ShapelyPolygon2Polygon(no_stop_shapely[0].convex_hull.buffer(safety_margin))
 
-    dummy_state = State(position=np.array(
+    dummy_state = InitialState(position=np.array(
         [0, 0]), orientation=0, velocity=0, time_step=planning_horizon)
     occupancy = Occupancy(planning_horizon, no_stop_polygon)
     prediction = SetBasedPrediction(planning_horizon, [occupancy])
@@ -151,7 +150,7 @@ def add_no_stop_zone_DEU_Ffb(scenario, planning_horizon, safety_margin=5):
 
 
 def create_planning_problem_DEU_Ffb(configuration, planning_id=0):
-    initial_state = State(position=np.array([configuration.get('initial_state_x'),
+    initial_state = InitialState(position=np.array([configuration.get('initial_state_x'),
                                              configuration.get('initial_state_y')]),
                           orientation=configuration.get(
                               'initial_state_orientation'),
@@ -160,7 +159,7 @@ def create_planning_problem_DEU_Ffb(configuration, planning_id=0):
                           yaw_rate=0,
                           slip_angle=0)
 
-    goal_state = State(position=Circle(2, np.array([configuration.get('goal_point_x'),
+    goal_state = InitialState(position=Circle(2, np.array([configuration.get('goal_point_x'),
                                            configuration.get('goal_point_y')])),
                        orientation=AngleInterval(-np.pi, np.pi-0.0000000000001),
                        velocity=Interval(0, 20),

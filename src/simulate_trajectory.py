@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 from commonroad.common.file_reader import CommonRoadFileReader
-from commonroad.scenario.trajectory import Trajectory, State
+from commonroad.scenario.trajectory import Trajectory, InitialState
 from commonroad.prediction.prediction import TrajectoryPrediction
 from commonroad.scenario.obstacle import DynamicObstacle, ObstacleType
 from commonroad.geometry.shape import Rectangle
@@ -26,9 +26,9 @@ def step_scenario(scenario):
 
 
 def step_vehicle(vehicle):
-    initial_state = vehicle.prediction.trajectory.state_list.pop(0)
+    initial_state = vehicle.prediction.trajectory.state_list[0]
     trajectory = Trajectory(1 + initial_state.time_step,
-                            vehicle.prediction.trajectory.state_list)
+                            vehicle.prediction.trajectory.state_list[1:])
     return DynamicObstacle(vehicle.obstacle_id,
                            vehicle.obstacle_type,
                            vehicle.obstacle_shape,
@@ -43,7 +43,7 @@ def step_simulation(scenario, configuration):
 
     ego_shape = Rectangle(configuration.get('vehicle_length'),
                           configuration.get('vehicle_width'))
-    ego_initial_state = State(position=np.array([configuration.get('initial_state_x'),
+    ego_initial_state = InitialState(position=np.array([configuration.get('initial_state_x'),
                                                  configuration.get('initial_state_y')]),
                               orientation=configuration.get(
                                   'initial_state_orientation'),
@@ -116,7 +116,7 @@ def step_simulation(scenario, configuration):
 
     # Set initial_state to initial state and not current
     ego_vehicle.initial_state = driven_state_list.pop(0)
-    driven_trajectory = Trajectory(0, driven_state_list)
+    driven_trajectory = Trajectory(1, driven_state_list)
     driven_trajectory_pred = TrajectoryPrediction(
         driven_trajectory, ego_vehicle.obstacle_shape)
     ego_vehicle.prediction = driven_trajectory_pred

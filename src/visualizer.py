@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 from matplotlib import animation
 import yaml
-from commonroad_dc.collision.visualization.draw_dispatch import draw_object
 from commonroad.scenario.obstacle import ObstacleType
+from commonroad.visualization.mp_renderer import MPRenderer
+from commonroad.visualization.draw_params import MPDrawParams, DynamicObstacleParams, ShapeParams
+from commonroad.geometry.shape import Polygon
 
 from utilities import ShapelyPolygon2Polygon, rgb2hex
 
@@ -97,183 +99,88 @@ class Visualizer:
         plt.savefig(file_name)
 
 
-    def draw_shadows(self, shadows, time_begin, time_horizon):
+    def draw_shadows(self, rnd, shadows, time_begin, time_horizon):
         # We use red
         R = int(255)
         G = int(0)
         B = int(0)
 
-        # Calculate the hex
-        color = rgb2hex(100,0,0)
-
         # Draw the first location of the shadows
-        shadow_draw_params = {'time_begin': time_begin,
-                              'time_end':time_begin + 1,
-                              'dynamic_obstacle': {'shape': {'opacity': 1,
-                                                             'facecolor': color,
-                                                             'edgecolor': color},
-                                                   'draw_shape': True,
-                                                   'occupancy': {'draw_occupancies': -1}
-                                                   }
-                              }
-        draw_object(shadows, draw_params=shadow_draw_params)
+        draw_params = DynamicObstacleParams.load(file_path="src/draw_params/shadow.yaml", validate_types=False)
+        draw_params.time_begin = time_begin
+        draw_params.time_end = time_begin + 1
+        for shadow in shadows:
+            shadow.draw(rnd, draw_params=draw_params)
 
         # Draw the shadow predictions
+        draw_params = DynamicObstacleParams.load(file_path="src/draw_params/shadow_prediction.yaml", validate_types=False)
         for i in reversed(range(time_horizon)):
             tint_factor = 0.005**(1/(i+1))
             Ri = int(R + (255 - R) * tint_factor)
             Gi = int(G + (255 - G) * tint_factor)
             Bi = int(B + (255 - G) * tint_factor)
             color = rgb2hex(Ri,Gi,Bi)
-            shadow_predictions_draw_params = {'time_begin': time_begin+i,
-                                              'time_end':time_begin+i+1,
-                                              'dynamic_obstacle': {'draw_shape': False,
-                                                                   'occupancy': {'draw_occupancies': 1,
-                                                                                 'shape': {'opacity': 1,
-                                                                                           'facecolor': color,
-                                                                                           'edgecolor': color,
-                                                                                           'zorder': 1}
-                                                                                 }
-                                                                   }
-                                              }
-            draw_object(shadows, draw_params=shadow_predictions_draw_params)
+
+            draw_params.time_begin = time_begin+i
+            draw_params.time_end = time_begin+i+1
+            draw_params.occupancy.shape.facecolor = color
+            draw_params.occupancy.shape.edgecolor = color
+            for shadow in shadows:
+                shadow.draw(rnd, draw_params=draw_params)
 
     def plot(self,
              scenario=None,
              time_begin=0,
              time_end=500,
              ego_vehicle=None,
-             obstacles=None,
-             lanes=None,
-             polygons=None,
-             shapelyPolygons=None,
-             shadows=None,
-             sensor_view=None,
-             goal_region=None):
+             sensor_view=None):
+        
+        draw_params = MPDrawParams().load(file_path="src/draw_params/scenario.yaml")
+        draw_params.time_begin = time_begin
+        draw_params.time_end = time_end
 
-        scenario_draw_params = {'time_begin': time_begin,
-                                'time_end': time_end,
-                                'scenario': {'static_obstacle': {'opacity': 1,
-                                                                 'facecolor': '#808080',
-                                                                 'edgecolor': '#000000',
-                                                                 'zorder': 1},
-                                             'dynamic_obstacle': {'shape': {'opacity': 1,
-                                                                            'facecolor': '#ffff00',
-                                                                            'edgecolor': '#000000',
-                                                                            'zorder': 100},
-                                                                  'occupancy': {'draw_occupancies': 1, #0=set, 1=set&traj, 2=None
-                                                                                'shape': {'opacity': 0.2,
-                                                                                          'facecolor': '#ffff00',
-                                                                                          'edgecolor': '#ffff00',
-                                                                                          'zorder': 100}},
-                                                                  'trajectory': {'draw_trajectory': False}
-                                                                  },
-                                             'lanelet_network': {'lanelet': {'left_bound_color': '#000000',
-                                                                             'right_bound_color': '#000000',
-                                                                             'draw_center_bound': False,
-                                                                             'fill_lanelet': False,
-                                                                             'draw_start_and_direction': False}}
-                                             }
-                               }
+        # Set global draw params for drawing
+        rnd = MPRenderer(figsize=(8,8))
+        rnd.draw_params = draw_params
 
         if sensor_view is not None:
-            draw_params = {'shape': {'opacity': 1,
-                                     'facecolor': '#E5E5FF',
-                                     'edgecolor': '#E5E5FF',
-                                     'zorder': 1}}
-            draw_object(ShapelyPolygon2Polygon(
-                sensor_view), draw_params=draw_params)
+            # Draw params can be overwritten when rendering specific objects
+            draw_params = ShapeParams.load(file_path="src/draw_params/sensor_view.yaml", validate_types=False)
+            ShapelyPolygon2Polygon(sensor_view).draw(rnd, draw_params=draw_params)
+            
         if scenario is not None:
             if ego_vehicle is not None:
                 scenario.remove_obstacle(ego_vehicle)
-                draw_object(ego_vehicle, draw_params={'time_begin': time_begin,
-                                                      'time_end': time_end,
-                                                      'dynamic_obstacle': {'shape': {'opacity': 1,
-                                                                                     'facecolor': '#0000ff',
-                                                                                     'edgecolor': '#000000'},
-                                                                           'occupancy': {'draw_occupancies': 1,
-                                                                                         'shape': {'opacity': 0.2,
-                                                                                                   'facecolor': '#0000ff',
-                                                                                                   'edgecolor': '#0000ff'}},
-                                                                           'trajectory': {'draw_trajectory': False}
-                                                                           }})
+
+                draw_params = DynamicObstacleParams.load(file_path="src/draw_params/ego_vehicle.yaml", validate_types=False)
+                draw_params.time_begin = time_begin
+                draw_params.time_end = time_end
+                ego_vehicle.draw(rnd, draw_params=draw_params)
+                
             shadow_obstacles = scenario.obstacles_by_role_and_type(
                 obstacle_type=ObstacleType.UNKNOWN)
             scenario.remove_obstacle(shadow_obstacles)
-            draw_object(scenario, draw_params=scenario_draw_params)
-            self.draw_shadows(shadow_obstacles, time_begin, 20)
+
+            self.draw_shadows(rnd, shadow_obstacles, time_begin, 20)
+            scenario.draw(rnd)
 
             scenario.add_objects(shadow_obstacles)
             if ego_vehicle is not None:
                 scenario.add_objects(ego_vehicle)
-        if obstacles is not None:
-            for obstacle in obstacles:
-                draw_params = {
-                    'shape': {'opacity': 0.2, 'facecolor': '#1d7eea'}}
-                draw_object(ShapelyPolygon2Polygon(
-                    obstacle), draw_params=draw_params)
-        if lanes is not None:
-            for lane in lanes:
-                draw_params = {
-                    'shape': {'opacity': 0.2, 'facecolor': '#1d7eea'}}
-                draw_object(lane.convert_to_polygon(), draw_params=draw_params)
-        if polygons is not None:
-            for polygon in polygons:
-                draw_params = {
-                    'shape': {'opacity': 0.5, 'facecolor': '#ffff00'}}
-                draw_object(polygon, draw_params=draw_params)
-        if shapelyPolygons is not None:
-            for shapelyPolygon in shapelyPolygons:
-                draw_params = {
-                    'shape': {'opacity': 0.5, 'facecolor': '#ffff00'}}
-                draw_object(ShapelyPolygon2Polygon(
-                    shapelyPolygon), draw_params=draw_params)
-        if shadows is not None:
-            for shadow in shadows:
-                draw_params = {
-                    'shape': {'opacity': 0.5, 'facecolor': '#ffff00'}}
-                draw_object(ShapelyPolygon2Polygon(
-                    shadow.polygon), draw_params=draw_params)
-        if goal_region is not None:
-            draw_params = {
-                "goal_region": {
-                    "draw_shape": False,
-                    "shape": {
-                        "circle": {
-                            "opacity": 1.0,
-                            "linewidth": 0.5,
-                            "facecolor": "#00ff00",
-                            "edgecolor": "#302404",
-                            "zorder": 15
-                            }
-                        }
-                    }
-                }
-            draw_object(goal_region, draw_params=draw_params)
+
+        rnd.render()
 
     def plot_show(self,
                   scenario=None,
                   time_begin=0,
                   ego_vehicle=None,
-                  obstacles=None,
-                  lanes=None,
-                  polygons=None,
-                  shapelyPolygons=None,
-                  shadows=None,
-                  sensor_view=None,
-                  goal_region=None):
+                  sensor_view=None):
 
         plt.figure(figsize=(10, 10))
         self.plot(scenario=scenario,
                   time_begin=time_begin,
                   ego_vehicle=ego_vehicle,
-                  obstacles=obstacles,
-                  lanes=lanes,
-                  polygons=polygons,
-                  shapelyPolygons=shapelyPolygons,
-                  shadows=shadows,
-                  sensor_view=sensor_view,
-                  goal_region=goal_region)
+                  sensor_view=sensor_view)
         plt.xlim(0, 100)
         plt.ylim(-50, 50)
         plt.show()

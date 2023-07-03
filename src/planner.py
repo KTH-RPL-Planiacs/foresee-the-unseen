@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from commonroad.scenario.trajectory import State, Trajectory
+from commonroad.scenario.trajectory import InitialState, Trajectory
 from commonroad.prediction.prediction import TrajectoryPrediction
 from commonroad.geometry.shape import Rectangle
 from commonroad_dc.collision.collision_detection.pycrcc_collision_dispatch import create_collision_checker, create_collision_object
@@ -132,7 +132,7 @@ class Planner:
             position = np.array(
                 [x_along_time[time_step], y_along_time[time_step]])
             orientation = orientations_along_time[time_step]
-            state = State(position=position,
+            state = InitialState(position=position,
                           orientation=orientation,
                           velocity=float(velocity),
                           time_step=time_step + start_time_step)
